@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>ProtoBuffersTest</artifactId>
+    <artifactId>GrpcService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProtoBuffersTest</name>
     <description>ProtoBuffersTest</description>

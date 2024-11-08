@@ -7,6 +7,7 @@ import com.example.grpc.generated.HelloRequest;
 import com.example.protobufferstest.Message;
 import com.example.protobufferstest.MessagesRepo;
 import io.grpc.stub.StreamObserver;
+import io.grpc.stub.annotations.GrpcGenerated;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
