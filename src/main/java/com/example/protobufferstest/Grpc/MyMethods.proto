@@ -6,14 +6,26 @@ option java_multiple_files = true;
 option java_package = "com.example.grpc.generated";
 option java_outer_classname = "GreeterProto";
 
-service Greeter {
-  rpc SayHello (HelloRequest) returns (HelloReply);
+service OrderSerice {
+  rpc SaveOrder (Order) returns (OrderReply);
+  rpc CheckOrder (OrderRequest) returns (Order);
+  rpc CheckInventories (InventoryRequest) returns (Inventory);
 }
 
-message HelloRequest {
+message Order {
   string name = 1;
 }
-
-message HelloReply {
+message OrderReply {
+  string name = 1;
+}
+message OrderRequest {
+  string name = 1;
+}
+message Inventory {
+  string name = 1;
+}
+message InventoryRequest {
   string message = 1;
 }
+
+
