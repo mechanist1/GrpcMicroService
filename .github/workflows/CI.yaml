@@ -1,0 +1,49 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adoptopenjdk'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=true
+
+      - name: Run tests with Maven
+        run: mvn test
+
+    # Optionally deploy (e.g., to a server or container registry)
+    # - name: Deploy to production server
+    #   run: ./deploy.sh
+
+    # Optionally, if you want to build a Docker image or use a Spring Boot JAR
+    # - name: Build Docker image
+    #   run: docker build -t my-spring-boot-app .
+
+    # If you use a Docker image, you can push it to DockerHub or another registry
+    # - name: Push Docker image
+    #   run: docker push my-spring-boot-app
