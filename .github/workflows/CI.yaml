@@ -20,21 +20,20 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'openjdk'
+          distribution: 'temurin'
+          cache: maven
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: clear project
+        run: mvn clean
+
+      - name: compile the project
+        run: mvn compile
+
+      - name: run test case
+        run: mvn test
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests=true
-
-      - name: Run tests with Maven
-        run: mvn test
+        run: mvn clean install package
 
     # Optionally deploy (e.g., to a server or container registry)
     # - name: Deploy to production server
