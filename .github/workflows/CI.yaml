@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'adoptopenjdk'
+          distribution: 'openjdk'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v4
