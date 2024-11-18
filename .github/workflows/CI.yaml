@@ -26,8 +26,8 @@ jobs:
       - name: compile the project
         run: mvn compile
 
-      #- name: run test case
-      #  run: mvn test
+      - name: run test case
+        run: mvn test
 
       - name: Build with Maven
         run: mvn clean install package
