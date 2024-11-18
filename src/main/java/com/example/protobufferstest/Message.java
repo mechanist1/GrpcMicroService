@@ -13,6 +13,11 @@ import lombok.NoArgsConstructor;
 public class Message {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     String name;
 
 }
