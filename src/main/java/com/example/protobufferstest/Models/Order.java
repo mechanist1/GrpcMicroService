@@ -1,10 +1,10 @@
 package com.example.protobufferstest.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,4 +16,14 @@ public class Order {
     Long serviceProviderId;
     Long serviceId;
     Long totalAmount;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_inventory",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "inventory_id"))
+    private List<Inventory> inventories = new ArrayList<>();
+
+
+
 }
