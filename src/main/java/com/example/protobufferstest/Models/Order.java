@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "orders") // Use a non-reserved name
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
