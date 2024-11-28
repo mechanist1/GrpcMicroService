@@ -22,7 +22,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,6 +45,23 @@ jobs:
       - name: Build with Maven
         run: mvn clean install package
 
+      # Get version from a VERSION file or increment based on git
+      - name: Get Version
+        id: version
+        run: |
+          if [ -f VERSION ]; then
+            VERSION=$(cat VERSION)
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+          else
+            VERSION="1.0.0"
+            echo $VERSION > VERSION
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+          fi
+          # Append Git short SHA for uniqueness
+          GIT_SHA=$(git rev-parse --short HEAD)
+          NEW_VERSION="$VERSION-$GIT_SHA"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -53,7 +69,16 @@ jobs:
           password: dckr_pat_f4szj9gJ7kku6kw0Fl3zoReo_QA  # Use secrets for production
 
       - name: Build Docker image
-        run: docker build -t azizdhoukar/ps5:Order .
+        run: docker build -t azizdhoukar/ps5:Order-${{ env.NEW_VERSION }} .
 
       - name: Push Docker image to Docker Hub
-        run: docker push azizdhoukar/ps5:Order
+        run: docker push azizdhoukar/ps5:Order-${{ env.NEW_VERSION }}
+
+      - name: Update VERSION file
+        run: |
+          echo "${{ env.NEW_VERSION }}" > VERSION
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add VERSION
+          git commit -m "Bump version to ${{ env.NEW_VERSION }}"
+          git push
