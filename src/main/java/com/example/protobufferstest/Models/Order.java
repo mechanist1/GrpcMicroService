@@ -2,13 +2,15 @@ package com.example.protobufferstest.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Getter
 @Entity
-@Table(name = "orders") // Use a non-reserved name
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +18,7 @@ public class Order {
     Long BookingId;
     Long serviceProviderId;
     Long serviceId;
-    Long totalAmount;
+    Double totalAmount;
 
     @ManyToMany
     @JoinTable(
