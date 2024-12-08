@@ -13,10 +13,4 @@ public class ProtoBuffersTestApplication {
         SpringApplication.run(ProtoBuffersTestApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner run(GRPCServer grpcServer) {
-        return args -> {
-            grpcServer.start();  // Start the gRPC server
-        };
-    }
 }
