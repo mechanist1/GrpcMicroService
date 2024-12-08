@@ -28,6 +28,7 @@ public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
     public void createOrder(GrpcOrder request, StreamObserver<OrderResponse> responseObserver) {
         Order order = new Order();
         order.setServiceProviderId(request.getServiceProviderId());
+        order.setBookingId(request.getBookingId());
         order.setServiceId(request.getServiceId());
         order.setTotalAmount(request.getTotalAmount());
 
