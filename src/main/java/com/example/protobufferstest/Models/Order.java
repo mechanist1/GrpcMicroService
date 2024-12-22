@@ -27,6 +27,4 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "inventory_id"))
     private List<Inventory> inventories = new ArrayList<>();
 
-
-
 }
