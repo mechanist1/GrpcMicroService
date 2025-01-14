@@ -12,8 +12,8 @@ jobs:
       postgres:
         image: postgres:17
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: admin
           POSTGRES_DB: grpcmsg
         ports:
           - 5432:5432
